@@ -1,0 +1,19 @@
+#include"mbed.h"
+#include"Servo.hpp"
+#include"config.hpp"
+#include "motor.hpp"
+#include "encoder.hpp"
+Timer timer;
+int main(){
+    Servo servo[2]{
+        {(PA_7)},
+        {(PB_2)}};
+    double t=timer.read();
+    
+    servo[0].set_angle(0);
+    
+    while(true){
+   while(timer.read() - t < dt);
+      
+}
+}
