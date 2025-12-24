@@ -4,12 +4,13 @@
 #include "config.hpp"
 #include "robomaster_can.hpp"
 #include "pid.hpp"
+#include"nakamura_hand.hpp"
 #include <cstdint>
 
 uint8_t right_arm = 4;
 uint8_t left_arm = 6;
 uint8_t center_arm = 5;
-int bit = 100000000;
+int bit = 1000000;
 
 void spring(PwmOut* servo) {
     servo->pulsewidth_us(1500);
@@ -50,57 +51,42 @@ int main() {
     Hand arm0(&servo[1], &servo[0], &esc0, &lim[1]);
     Hand arm1(&servo[3], &servo[2], &esc1, &lim[3]);
     Hand arm2(&servo[5], &servo[4], &esc2, &lim[5]);
-
-   
-
-//     arm2.scaffold_hold();
-//     arm1.scaffold_hold();
-//     arm2.scaffold_hold();
-//     ThisThread::sleep_for(1000);
-
-//     arm0.ring_hold();
-//     arm1.ring_hold();
-//     ThisThread::sleep_for(1000);
-
-//     arm0.scaffold_hold();
-//     arm1.scaffold_hold();
-//     arm2.scaffold_hold();
-//     ThisThread::sleep_for(1000);
-
-//     arm0.scaffold_leave();
-//     arm1.scaffold_leave();
-//     arm2.scaffold_leave();
-//     ThisThread::sleep_for(1000);
-
-//     arm0.ring_leave();
-//     arm1.ring_leave();
-//     arm0.scaffold_leave();
-//     arm1.scaffold_leave();
-//     ThisThread::sleep_for(1000);
-
-//     arm1.ring_hold();
-//     arm2.ring_hold();
-//     ThisThread::sleep_for(1000);
-
-//     arm2.ring_leave();
-//     arm2.scaffold_leave();
-//     ThisThread::sleep_for(1000);
-
-//     spring(&servo[6]);
-//     ThisThread::sleep_for(1000);
-// arm1.ring_leave();
-//  ThisThread::sleep_for(1000);
-
-
     
     while (true) {
-        arm0.ring_hold();
-        arm1.ring_hold();
-        arm2.ring_hold();
+        ThisThread::sleep_for(5000);
         arm0.scaffold_hold();
-        arm1.scaffold_hold();
-        arm2.scaffold_hold();
+          arm1.scaffold_hold();
+          arm2.scaffold_hold();
+          ThisThread::sleep_for(5000);
+
+          arm0.ring_hold();
+          arm1.ring_hold();
+          ThisThread::sleep_for(5000);
+
+          arm0.scaffold_leave();
+          arm1.scaffold_leave();
+         arm0.ring_leave();
+         arm1.ring_leave();
+
+    ThisThread::sleep_for(5000);
+
+    
+          arm1.ring_hold();
+          arm2.ring_hold();
+          
+          ThisThread::sleep_for(5000);
+
+    
+          arm2.ring_leave();
+          arm2.scaffold_leave();
+
+    ThisThread::sleep_for(5000);
+      spring(&servo[6]);
+ThisThread::sleep_for(5000);
+arm1.ring_leave();
+ThisThread::sleep_for(5000);
         while(timer.read() - t < dt);
         t = timer.read();
+        break;
     }
 }
