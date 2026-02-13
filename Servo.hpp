@@ -1,5 +1,5 @@
-#ifndef ARRC_MOTOR_H_
-#define ARRC_MOTOR_H_
+#ifndef ARRC_SERVO_H_
+#define ARRC_SERVO_H_
 #include "mbed.h"
 #include "motor.hpp"
 
